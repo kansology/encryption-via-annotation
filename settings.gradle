@@ -1,0 +1,5 @@
+rootProject.name = 'encryption-via-annotation'
+
+include 'annotation', 'annotation-impl'
+project(':annotation')
+project(':annotation-impl')
