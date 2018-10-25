@@ -2,6 +2,7 @@ package com.kansal.annotationimpl.model;
 
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.kansal.annotation.convertor.Decryptor;
 import com.kansal.annotation.convertor.Encryptor;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,6 @@ import lombok.NoArgsConstructor;
 public class PersonDecrypt {
     private String fname;
     private String lname;
-    @JsonDeserialize(converter = Decryptor.class)
+    @JsonSerialize(converter = Decryptor.class)
     private String ssnLast4;
 }

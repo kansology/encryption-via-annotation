@@ -13,12 +13,14 @@ public class PersonController {
     @PostMapping(produces = "application/json", path = "/encrypt")
     @ResponseBody
     public PersonEncrypt encryptPerson(@RequestBody PersonEncrypt personEncrypt) {
+        System.out.println("personEncrypt = [" + personEncrypt + "]");
         return personEncrypt;
     }
 
     @PostMapping(produces = "application/json", path = "/decrypt")
     @ResponseBody
     public PersonDecrypt encryptPerson(@RequestBody PersonDecrypt personDecrypt) {
+        System.out.println("personDecrypt = [" + personDecrypt + "]");
         return personDecrypt;
     }
 }
