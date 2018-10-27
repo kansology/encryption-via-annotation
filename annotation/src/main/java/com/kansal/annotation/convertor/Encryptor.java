@@ -1,22 +1,21 @@
 package com.kansal.annotation.convertor;
 
 import com.fasterxml.jackson.databind.util.StdConverter;
-import com.kansal.annotation.service.CryptoService;
+import com.kansal.annotation.util.CryptoUtil;
+import org.springframework.stereotype.Component;
 
-import java.io.UnsupportedEncodingException;
-
+@Component
 public class Encryptor extends StdConverter<String, String> {
+
     @Override
-    public String convert(String value) {
-        System.out.println("value: " + value);
-        CryptoService cryptoService;
-        String encryptedValue = value;
+    public String convert(String plainText) {
+        System.out.println("plainText: " + plainText);
+        String encryptedValue;
         try {
-            cryptoService = new CryptoService("RandomInitVector".getBytes("UTF-8"),
-                    "Bar12345Bar12345".getBytes("UTF-8"));
-            encryptedValue = cryptoService.encrypt(value);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            encryptedValue = CryptoUtil.encrypt(plainText);
+        } catch (Exception e) {
+            System.out.println("Exception while encrypting " + e);
+            return plainText;
         }
         return encryptedValue;
     }

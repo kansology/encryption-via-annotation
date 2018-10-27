@@ -1,6 +1,5 @@
 package com.kansal.annotation.service;
 
-
 import org.springframework.util.StringUtils;
 
 import javax.crypto.*;
@@ -14,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
 
-public class CryptoService {
+public class AESCryptoService implements ICryptoService {
 
     private static final int DEFAULT_KEY_ITERATIONS = 2048;
     private static String ALGORITHM = "AES/CBC/PKCS5PADDING";
@@ -28,7 +27,7 @@ public class CryptoService {
      * @param salt
      * @param keyIterations
      */
-    public CryptoService(String key, String salt, Integer keyIterations) {
+    public AESCryptoService(String key, String salt, Integer keyIterations) {
         try {
             if (StringUtils.isEmpty(key)) {
                 throw new RuntimeException("The key field cannot be null ");
@@ -49,7 +48,7 @@ public class CryptoService {
     }
 
 
-    public CryptoService(byte[] iv, byte[] secretKey) {
+    public AESCryptoService(byte[] iv, byte[] secretKey) {
         this.iv = iv;
         this.secret = new SecretKeySpec(secretKey, "AES");
     }
@@ -96,9 +95,6 @@ public class CryptoService {
         } catch (InvalidKeyException | NoSuchPaddingException | InvalidAlgorithmParameterException | NoSuchAlgorithmException | IllegalBlockSizeException | BadPaddingException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
-
         }
-
     }
-
 }
